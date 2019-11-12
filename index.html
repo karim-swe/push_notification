@@ -41,7 +41,7 @@ const firebaseConfig = {
 
 
 	const messaging = firebase.messaging();
-	
+	useServiceworker('firebase-messaging-sw.js');
 	// Add the public key generated from the console here.
 messaging.usePublicVapidKey("BCBybH7RwPHWSZtYt-DVUxelEEtOnVVZjEZezEta2f-5fpAEIWX8kV1Ow_ilSrzNLh2gGlKgQWWLGaUL6NDPvQM");
 		
