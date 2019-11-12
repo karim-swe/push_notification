@@ -1,0 +1,103 @@
+
+<html>
+<body>
+
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-messaging.js"></script>
+  
+  <!--<script defer src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+
+<script defer src="https://www.gstatic.com/firebasejs/7.3.0/firebase-auth.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script>
+
+
+<!--<script defer src="./firebase-messaging-sw.js"></script>-->
+  
+  
+  <script>
+    // TODO: Replace the following with your app's Firebase project configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCbsCoWqDbHvIGchNs0Gu9SDV4Icaf8LM8",
+  authDomain: "mucuni-5ef2a.firebaseapp.com",
+  databaseURL: "https://mucuni-5ef2a.firebaseio.com",
+  projectId: "mucuni-5ef2a",
+  storageBucket: "mucuni-5ef2a.appspot.com",
+  messagingSenderId: "739489818389",
+  appId: "1:739489818389:web:09de5169fe25f9166f2b1c",
+  measurementId: "G-MPFLLVFL7C"
+};
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+	//firebase.analytics();
+	
+
+
+	const messaging = firebase.messaging();
+	
+	// Add the public key generated from the console here.
+messaging.usePublicVapidKey("BCBybH7RwPHWSZtYt-DVUxelEEtOnVVZjEZezEta2f-5fpAEIWX8kV1Ow_ilSrzNLh2gGlKgQWWLGaUL6NDPvQM");
+		
+		messaging.requestPermission()
+.then(function() {
+  console.log('Notification permission granted.');
+  messaging.getToken().then((currentToken) => {
+			  if (currentToken) {
+				//sendTokenToServer(currentToken);
+			   // updateUIForPushEnabled(currentToken);
+				console.log(currentToken);
+			  } else {
+				// Show permission request.
+				console.log('No Instance ID token available. Request permission to generate one.');
+				// Show permission UI.
+			  // updateUIForPushPermissionRequired();
+	//setTokenSentToServer(true);
+			  };
+			}).catch((err) => {
+			  console.log('An error occurred while retrieving token. ', err);
+			 // showToken('Error retrieving Instance ID token. ', err);
+			  //setTokenSentToServer(true);
+			});
+})
+.catch(function(err) {
+  console.log('Unable to get permission to notify. ', err);
+});
+
+		
+		
+		
+
+			
+			
+
+		
+	// Handle incoming messages. Called when:
+// - a message is received while the app has focus
+// - the user clicks on an app notification created by a service worker
+//   `messaging.setBackgroundMessageHandler` handler.
+messaging.onMessage((payload) => {
+  console.log('Message received. ', payload);
+  // ...
+});
+
+
+
+
+
+
+
+
+
+
+  </script>
+  
+</body>
+</html>
